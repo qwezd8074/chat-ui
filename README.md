@@ -1,16 +1,32 @@
-# React + Vite
+# 실행방법
+```bash
+# 의존성 패키지 설치
+pnpm install
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 서버 실행
+pnpm dev
+```
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# 폴더 구조
+```bash
+src/
+ ├─ assets/           # 이미지, 폰트, 정적 파일
+ ├─ components/       # 공통 컴포넌트 (Header, Footer, Button 등)
+ ├─ layouts/          # 페이지 레이아웃 (공통 UI 구조)
+ ├─ pages/            # 라우트 단위 페이지 컴포넌트
+ │   ├─ Home/
+ │   │   ├─ index.jsx
+ │   │   └─ Home.css
+ │   ├─ About/
+ │   │   ├─ index.jsx
+ │   │   └─ About.css
+ │   └─ NotFound.jsx
+ ├─ routes/           # 라우터 설정 모음
+ │   └─ AppRouter.jsx
+ ├─ hooks/            # 커스텀 훅
+ ├─ context/          # React Context 관련 (ex. AuthContext)
+ ├─ services/         # API 통신, firebase, axios 등
+ ├─ utils/            # 유틸 함수
+ ├─ App.jsx
+ └─ main.jsx          # 엔트리포인트 (ReactDOM.render or createRoot)
+```
