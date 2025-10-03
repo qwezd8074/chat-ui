@@ -6,14 +6,14 @@ function App() {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
 
-  async function handleLogin() {
-    // TODO: 로그인 요청 로직 구현 필요
+  async function handleJoin() {
+    // TODO: 회원가입 요청 로직 구현 필요
     const formData = new FormData();
     formData.append("name", name);
     formData.append("pass", pass);
 
     await axios
-      .post("http://localhost:8080/login", formData, {
+      .post("http://localhost:8080/join", formData, {
         withCredentials: true, // 쿠키를 함께 보내도록 설정
       })
       .then((response) => {
@@ -55,7 +55,7 @@ function App() {
           />
         </div>
         <div className={"button-group"}>
-          <button onClick={handleLogin}>login</button>
+          <button onClick={handleJoin}>Register</button>
         </div>
       </div>
     </main>

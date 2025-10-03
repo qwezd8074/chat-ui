@@ -10,10 +10,10 @@ export default function App() {
       {/* 테스트용 네비 */}
       <nav style={{ display: "flex", gap: 12, padding: 12 }}>
         <button>
-          <Link to="/signin">회원가입</Link>
+          <Link to="/signin">로그인</Link>
         </button>
         <button>
-          <Link to="/signup">로그인</Link>
+          <Link to="/signup">회원가입</Link>
         </button>
       </nav>
 
