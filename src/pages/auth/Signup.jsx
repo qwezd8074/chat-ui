@@ -1,59 +1,72 @@
 import axios from "axios";
 import "../../App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
 
+  // ✅ 아이디 중복확인
+  async function handleCheckName() {
+    if (!name.trim()) {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+
+    try {
+      const res = await axios.get("http://localhost:8080/checkName", {
+        params: { name },
+        withCredentials: true,
+      });
+
+      alert(res.data); // "사용 가능한 아이디입니다."
+    } catch (error) {
+      const msg =
+        typeof error.response.data === "string"
+          ? error.response.data
+          : error.response.data.message || "중복확인 중 오류가 발생했습니다.";
+      alert(msg); // "이미 사용 중인 아이디입니다."
+    }
+  }
+
+  // ✅ 회원가입
   async function handleJoin() {
-    // TODO: 회원가입 요청 로직 구현 필요
     const formData = new FormData();
     formData.append("name", name);
     formData.append("pass", pass);
 
-    await axios
-      .post("http://localhost:8080/join", formData, {
-        withCredentials: true, // 쿠키를 함께 보내도록 설정
-      })
-      .then((response) => {
-        // response 안에 데이터가 들어있음
-        console.log(response.data); // 실제 응답 데이터
-        alert(response.data);
-      })
-      .catch((error) => {
-        console.error("에러 발생:", error);
-        alert(error.response.data);
+    try {
+      const res = await axios.post("http://localhost:8080/join", formData, {
+        withCredentials: true,
       });
+      alert(res.data);
+    } catch (error) {
+      const msg =
+        typeof error.response.data === "string"
+          ? error.response.data
+          : error.response.data.message || "회원가입 중 오류 발생";
+      alert(msg);
+    }
   }
-
-  useEffect(() => {
-    console.log(name);
-  }, [name]);
-
-  useEffect(() => {
-    console.log(pass);
-  }, [pass]);
 
   return (
     <main className={"wrapper"}>
       <div className={"box"}>
         <div className={"input-group"}>
           <label>ID</label>
-          <input
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
+          <input onChange={(e) => setName(e.target.value)} value={name} />
+          <button onClick={handleCheckName}>중복확인</button>
         </div>
+
         <div className={"input-group"}>
           <label>PASS</label>
           <input
-            onChange={(e) => {
-              setPass(e.target.value);
-            }}
+            type="password"
+            onChange={(e) => setPass(e.target.value)}
+            value={pass}
           />
         </div>
+
         <div className={"button-group"}>
           <button onClick={handleJoin}>Register</button>
         </div>
